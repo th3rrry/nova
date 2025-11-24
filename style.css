@@ -1066,6 +1066,247 @@ body {
 }
 
 /* Премиальный дизайн сигнала */
+/* Новая карточка сигнала */
+.signal-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.signal-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.signal-card-trading-pair {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.signal-card-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    opacity: 0.6;
+    text-align: center;
+}
+
+.signal-card-pair-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+.signal-card-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px 24px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.signal-card-action-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    opacity: 0.8;
+    align-self: flex-start;
+}
+
+.signal-card-action.signal-buy {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+.signal-card-action.signal-buy .signal-card-action-icon-button {
+    background: rgba(5, 150, 105, 0.8);
+}
+
+.signal-card-action.signal-sell {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+}
+
+.signal-card-action.signal-sell .signal-card-action-icon-button {
+    background: rgba(220, 38, 38, 0.8);
+}
+
+.signal-card-action-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.signal-card-action-icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.signal-card-action-icon-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.signal-card-action-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.signal-card-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+}
+
+.signal-card-info-box {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.03);
+    border: none;
+    border-radius: 12px;
+}
+
+.signal-card-info-icon {
+    display: flex;
+    align-items: flex-start;
+    color: var(--text-primary);
+    opacity: 0.6;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.signal-card-info-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.signal-card-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.signal-card-info-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-primary);
+    opacity: 0.6;
+}
+
+.signal-card-info-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.signal-card-info-value.signal-card-accuracy-value {
+    color: var(--accent-green);
+}
+
+.signal-card-expires {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 12px;
+}
+
+.signal-card-expires-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signal-card-expires-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    opacity: 0.7;
+}
+
+.signal-card-completed-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-green);
+    text-align: center;
+    width: 100%;
+}
+
+.signal-card-expires-time {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-green);
+    font-family: 'Montserrat', monospace;
+}
+
+.signal-card-expires-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-green);
+    border-radius: 50%;
+}
+
+.signal-card-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-light);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.signal-card-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-green) 0%, #34d399 100%);
+    border-radius: 8px;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
 .signal-premium-container {
     display: flex;
     flex-direction: column;
@@ -1664,11 +1905,27 @@ body {
     
     .signal-block {
         min-height: auto;
+        overflow: visible;
+        height: auto;
     }
     
     .signal-result {
         padding: 12px;
         min-height: auto;
+        height: auto;
+    }
+    
+    .signal-card-trading-pair {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .signal-card-label {
+        text-align: center;
+    }
+    
+    .signal-card-pair-value {
+        text-align: center;
     }
     
     .signal-premium-container {
@@ -1827,6 +2084,69 @@ body {
     .signal-result {
         padding: 10px;
         min-height: auto;
+        height: auto;
+    }
+    
+    .signal-block {
+        min-height: auto;
+        overflow: visible;
+        height: auto;
+    }
+    
+    .signal-card-container {
+        padding: 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .signal-card-content {
+        gap: 14px;
+    }
+    
+    .signal-card-trading-pair {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .signal-card-label {
+        text-align: center;
+    }
+    
+    .signal-card-pair-value {
+        font-size: 18px;
+        text-align: center;
+    }
+    
+    .signal-card-action {
+        padding: 16px 20px;
+    }
+    
+    .signal-card-action-text {
+        font-size: 20px;
+    }
+    
+    .signal-card-action-icon-button {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .signal-card-action-icon-button svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .signal-card-info-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .signal-card-info-box {
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .signal-card-info-value {
+        font-size: 14px;
     }
     
     .signal-premium-container {
