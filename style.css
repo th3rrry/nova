@@ -1,0 +1,2083 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap');
+
+:root {
+    /* Светлая тема */
+    --bg-white: #ffffff;
+    --bg-light: #f0f2f5;
+    --text-primary: #1e293b;
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    --button-gradient: linear-gradient(135deg, #10b981, #059669);
+    --hover-bg: rgba(16, 185, 129, 0.05);
+    --header-gradient: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    --accent-green-rgb: 16, 185, 129;
+}
+
+/* Стили для верхнего меню */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    grid-area: header;
+}
+
+.logo-compact {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.logo-compact h2 {
+    font-size: 18px;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Выпадающий список языков */
+.lang-dropdown {
+    position: relative;
+    user-select: none;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 150;
+}
+
+.lang-selected {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-light);
+    border-radius: 8px;
+    padding: 6px 12px;
+    gap: 6px;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.lang-selected:hover {
+    background-color: var(--hover-bg);
+}
+
+.lang-dropdown-content {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 8px;
+    background-color: var(--bg-white);
+    border-radius: 8px;
+    min-width: 160px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+    overflow-y: auto;
+    max-height: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-green) var(--bg-light);
+}
+
+.lang-dropdown.active .lang-dropdown-content {
+    max-height: 280px;
+    opacity: 1;
+    border: 1px solid var(--border-color);
+    overflow-y: auto;
+}
+
+/* Стили для скроллбара в языковом селекторе */
+.lang-dropdown-content::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--bg-light);
+    border-radius: 4px;
+}
+
+.lang-dropdown-content::-webkit-scrollbar-thumb {
+    background-color: var(--accent-green);
+    border-radius: 4px;
+}
+
+.lang-dropdown-content::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(var(--accent-green-rgb), 0.8);
+}
+
+.lang-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.lang-item:hover {
+    background-color: var(--hover-bg);
+}
+
+.lang-item.active {
+    background-color: rgba(16, 185, 129, 0.1);
+    font-weight: 500;
+}
+
+.flag-icon {
+    width: 20px;
+    height: auto;
+    border-radius: 2px;
+}
+
+.arrow-down {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.lang-dropdown.active .arrow-down {
+    transform: rotate(180deg);
+}
+
+/* Селектор темы */
+.theme-selector {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-light);
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.theme-selector .theme-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+    margin: 0 2px;
+}
+
+.theme-selector .theme-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: #1e293b;
+    stroke: #1e293b;
+    opacity: 1;
+    transition: all 0.2s ease;
+}
+
+.theme-selector .theme-btn.active {
+    background-color: var(--accent-green);
+}
+
+.theme-selector .theme-btn.active svg {
+    fill: white;
+    stroke: white;
+    opacity: 1;
+}
+
+.theme-selector .theme-btn:hover:not(.active) {
+    background-color: var(--hover-bg);
+}
+
+.theme-selector .theme-btn:hover:not(.active) svg {
+    opacity: 1;
+    fill: var(--accent-green);
+    stroke: var(--accent-green);
+}
+
+/* Стили для мобильной версии */
+@media (max-width: 768px) {
+    .top-header {
+        padding: 8px 15px;
+    }
+    
+    .lang-selected {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
+    
+    .theme-selector .theme-btn {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .theme-selector .theme-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Стили для разделов валютных пар */
+.market-type-header {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-green);
+    background-color: rgba(16, 185, 129, 0.05);
+    border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.market-type-header:not(:first-child) {
+    margin-top: 10px;
+}
+
+/* Исправление скрытия заголовка типа рынка */
+.market-type-header[style*="display: none"] + .select-item {
+    border-top: 1px solid var(--border-color);
+}
+
+/* Остальные стили */
+[data-theme="dark"] {
+    --bg-white: #0f172a;
+    --bg-light: #1e293b;
+    --text-primary: #f1f5f9;
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+    --border-color: #334155;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+    --button-gradient: linear-gradient(135deg, #10b981, #059669);
+    --hover-bg: rgba(16, 185, 129, 0.1);
+    --header-gradient: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(15,23,42,0.7));
+    --accent-green-rgb: 16, 185, 129;
+}
+
+[data-theme="dark"] .theme-selector .theme-btn svg {
+    fill: #f1f5f9;
+    stroke: #f1f5f9;
+}
+
+[data-theme="crypto"] {
+    --bg-white: #13111c;
+    --bg-light: #1a1625;
+    --text-primary: #f4f2ff;
+    --accent-green: #00ffa3;
+    --accent-red: #ff4a6c;
+    --border-color: #2c243c;
+    --shadow-color: rgba(0, 255, 163, 0.15);
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    --button-gradient: linear-gradient(135deg, #00ffa3, #00c67f);
+    --hover-bg: rgba(0, 255, 163, 0.1);
+    --header-gradient: linear-gradient(135deg, rgba(19,17,28,0.9), rgba(19,17,28,0.7));
+    --accent-green-rgb: 0, 255, 163;
+}
+
+[data-theme="crypto"] .theme-selector .theme-btn svg {
+    fill: #f4f2ff;
+    stroke: #f4f2ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(circle at 90% 10%, rgba(var(--accent-green-rgb), 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 10% 90%, rgba(var(--accent-green-rgb), 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+}
+
+/* Контейнер и сетка */
+.container {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header header"
+        "sidebar main";
+    min-height: 100vh;
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Стили для элементов с данными */
+.signal-block, .chart-block {
+    background-color: var(--bg-white);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    height: auto;
+}
+
+/* Увеличиваем относительный размер блока с сигналом и делаем его ближе к кнопкам */
+.signal-block {
+    min-height: 250px;
+    flex: 1 0 320px;
+    margin-bottom: 20px;
+    margin-right: 24px;
+    width: 100%;
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chart-block {
+    height: 400px;
+    flex: 2 0 auto;
+    order: 2;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.chart {
+    width: 100%;
+    height: calc(100% - 60px);
+    min-height: 320px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.tradingview-widget-container {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+}
+
+.tradingview-widget-container__widget {
+    width: 100%;
+    height: 100%;
+}
+
+/* Сообщение для OTC пар */
+.chart-otc-message {
+    display: none;
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.otc-message-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%);
+    border: none;
+    box-shadow: none;
+    animation: otc-pulse 2s ease-in-out infinite;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+@keyframes otc-pulse {
+    0%, 100% {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%);
+        box-shadow: 0 8px 32px rgba(239, 68, 68, 0.2);
+        border-color: rgba(239, 68, 68, 0.3);
+    }
+    50% {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(220, 38, 38, 0.2) 100%);
+        box-shadow: 0 8px 40px rgba(239, 68, 68, 0.35);
+        border-color: rgba(239, 68, 68, 0.5);
+    }
+}
+
+.otc-message-icon {
+    width: 64px;
+    height: 64px;
+    color: #ef4444;
+    animation: otc-icon-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes otc-icon-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.otc-message-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ef4444;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.otc-message-text {
+    font-size: 16px;
+    color: var(--text-primary);
+    opacity: 0.9;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* Стили для свечей графика */
+.candles .candle .wick {
+    stroke-linecap: round;
+}
+
+.candles .candle .up-body {
+    filter: drop-shadow(0 1px 4px rgba(16, 185, 129, 0.2));
+}
+
+.candles .candle .down-body {
+    filter: drop-shadow(0 1px 4px rgba(239, 68, 68, 0.2));
+}
+
+/* Стили для осей графика */
+.chart svg text {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.chart svg .domain {
+    stroke-width: 1px;
+}
+
+/* Боковая панель */
+.sidebar {
+    grid-area: sidebar;
+    background-color: var(--bg-white);
+    padding: 24px;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Основной контент */
+.main-content {
+    grid-area: main;
+    padding: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Логотип */
+.logo {
+    margin-bottom: 28px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+/* Настройки сигнала */
+.settings {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 10px;
+}
+
+.settings-icon {
+    color: var(--accent-green);
+}
+
+.settings-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Группа инпутов */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Кастомный селект */
+.custom-select {
+    position: relative;
+    user-select: none;
+}
+
+.select-selected {
+    background-color: var(--bg-light);
+    padding: 14px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.2s ease;
+    font-size: 15px;
+}
+
+.select-selected::after {
+    content: "";
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--text-primary);
+    transition: transform 0.2s ease;
+}
+
+.select-selected.select-arrow-active::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.select-items {
+    position: absolute;
+    background-color: var(--bg-white);
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    margin-top: 8px;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-green) var(--bg-light);
+    overscroll-behavior: contain;
+}
+
+/* Стили для скроллбара в селекторе */
+.select-items::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--bg-light);
+    border-radius: 4px;
+}
+
+.select-items::-webkit-scrollbar-thumb {
+    background-color: var(--accent-green);
+    border-radius: 4px;
+}
+
+.select-items::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(var(--accent-green-rgb), 0.8);
+}
+
+/* Исправление скролла для селектора валютных пар */
+#currency-pair-items {
+    max-height: 300px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+/* Исправление скролла для селектора таймфреймов */
+#timeframe-items {
+    max-height: 300px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.select-item {
+    padding: 14px 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+}
+
+.select-item:hover, .select-item.selected {
+    background-color: var(--hover-bg);
+}
+
+.select-hide {
+    display: none;
+}
+
+.hidden-select {
+    display: none;
+}
+
+/* Настройка переключателя OTC/Standard */
+.mode-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: var(--bg-light);
+    border-radius: 10px;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 12px 14px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    border-radius: 8px;
+}
+
+.mode-btn.active {
+    background-color: var(--accent-green);
+    color: white;
+    box-shadow: 0 3px 10px rgba(var(--accent-green-rgb), 0.2);
+}
+
+.mode-btn:hover:not(.active) {
+    background-color: var(--hover-bg);
+}
+
+/* Кнопка получения сигнала */
+.generate-btn-effect {
+    position: relative;
+    overflow: hidden;
+    background: var(--button-gradient);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(var(--accent-green-rgb), 0.25);
+    letter-spacing: 0.3px;
+    height: 54px;
+}
+
+.generate-btn-effect:hover {
+    box-shadow: 0 6px 20px rgba(var(--accent-green-rgb), 0.35);
+    transform: translateY(-2px);
+}
+
+.generate-btn-effect:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(var(--accent-green-rgb), 0.2);
+}
+
+.generate-btn-effect::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(rgba(255,255,255,0.8), transparent 70%);
+    border-radius: 50%;
+    top: var(--y, 0);
+    left: var(--x, 0);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.generate-btn-effect:hover::before {
+    opacity: 0.3;
+}
+
+/* Кнопка "Получить сигнал" с эффектом загрузки */
+.generate-btn-effect.loading {
+    background: linear-gradient(45deg, var(--accent-green) 25%, #059669 25%, #059669 50%, var(--accent-green) 50%, var(--accent-green) 75%, #059669 75%);
+    background-size: 40px 40px;
+    animation: loading-gradient 2s linear infinite;
+}
+
+@keyframes loading-gradient {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 40px;
+    }
+}
+
+/* Кнопка "Анализируем..." с диагональными полосками */
+.generate-btn-effect.analyzing {
+    background: repeating-linear-gradient(
+        135deg,
+        #10b981 0px,
+        #10b981 20px,
+        #059669 20px,
+        #059669 40px
+    );
+    background-size: 56.57px 56.57px;
+    animation: analyzing-stripes 1s linear infinite;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4), 0 0 30px rgba(16, 185, 129, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.generate-btn-effect.analyzing::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    border-radius: 25px;
+    pointer-events: none;
+}
+
+/* Кнопка неактивна в выходные дни */
+.generate-btn-effect.weekend-disabled {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+    position: relative;
+}
+
+.generate-btn-effect.weekend-disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
+.generate-btn-effect.weekend-disabled::before {
+    display: none;
+}
+
+.generate-btn-effect.weekend-disabled::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.05) 10px,
+        rgba(255, 255, 255, 0.05) 20px
+    );
+    border-radius: 25px;
+    pointer-events: none;
+}
+
+@keyframes analyzing-stripes {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 56.57px 56.57px;
+    }
+}
+
+/* Телеграм кнопка */
+.telegram-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 25px;
+    background-color: #0088cc;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 136, 204, 0.2);
+}
+
+.telegram-btn:hover {
+    background-color: #0077b5;
+    transform: translateY(-1px);
+}
+
+.telegram-icon {
+    width: 22px;
+    height: 22px;
+}
+
+/* Блок сигнала */
+.signal-header {
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chart-header {
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.signal-icon, .chart-icon {
+    color: var(--accent-green);
+}
+
+.time-badge {
+    background-color: var(--accent-green);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Inter', monospace;
+    letter-spacing: 0.5px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.signal-placeholder {
+    text-align: center;
+    color: var(--text-primary);
+    opacity: 0.7;
+    font-size: 16px;
+    padding: 15px;
+}
+
+/* Стили для блока результатов */
+.signal-result {
+    padding: 24px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1;
+}
+
+.signal-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.signal-pair {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.signal-direction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 15px 0;
+    padding: 16px 20px;
+    border-radius: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.signal-direction.green {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--accent-green);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.signal-direction.red {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--accent-red);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.signal-direction .signal-text {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.signal-direction .arrow-icon {
+    width: 44px;
+    height: 44px;
+    margin-left: 15px;
+}
+
+.signal-time-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 0;
+    padding: 12px 16px;
+    background-color: var(--bg-light);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+}
+
+.signal-timeframe, .signal-probability {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.signal-timeframe span, .signal-probability span {
+    font-size: 12px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.signal-timeframe .value, .signal-probability .value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent-green);
+}
+
+/* Анимация загрузки */
+.loading-animation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Контейнер для анимации загрузки в signal-block */
+.loading-animation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    min-height: 160px;
+}
+
+.loading-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.loading-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #10b981;
+    animation: loading-dot-pulse 1.4s infinite ease-in-out;
+}
+
+.loading-dot:nth-child(1) {
+    background-color: #34d399;
+    animation-delay: 0s;
+}
+
+.loading-dot:nth-child(2) {
+    background-color: #10b981;
+    animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+    background-color: #059669;
+    animation-delay: 0.4s;
+}
+
+@keyframes loading-dot-pulse {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.loading-text {
+    font-size: 15px;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Премиальный дизайн сигнала */
+.signal-premium-container {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 4.5%, 20px);
+    width: 100%;
+    padding: clamp(20px, 5.5%, 28px);
+    box-sizing: border-box;
+}
+
+.signal-premium-header {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 4%, 18px);
+}
+
+.signal-currency-pair {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
+
+.signal-meta-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(14px, 4.5%, 22px);
+    padding: clamp(14px, 4%, 20px);
+    background: linear-gradient(135deg, rgba(var(--accent-green-rgb), 0.08) 0%, rgba(var(--accent-green-rgb), 0.03) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(var(--accent-green-rgb), 0.15);
+}
+
+.signal-meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(4px, 1.5%, 8px);
+}
+
+.signal-meta-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    opacity: 0.6;
+    line-height: 1.2;
+}
+
+.signal-meta-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent-green);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.signal-meta-divider {
+    width: 1px;
+    height: 30px;
+    background: linear-gradient(180deg, transparent, var(--border-color), transparent);
+}
+
+.signal-action-premium {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 4.5%, 22px) clamp(24px, 6.5%, 36px);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    margin: 0;
+}
+
+.signal-action-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.signal-action-premium.signal-buy {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+}
+
+.signal-action-premium.signal-buy::before {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.signal-action-premium.signal-sell {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
+}
+
+.signal-action-premium.signal-sell::before {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+.signal-action-premium:hover::before {
+    opacity: 1;
+}
+
+.signal-action-content {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 3%, 16px);
+    position: relative;
+    z-index: 1;
+}
+
+.signal-action-icon-premium {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.signal-action-text-premium {
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.signal-progress-premium {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 3%, 14px);
+    margin: 0;
+}
+
+.signal-progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signal-progress-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.signal-progress-time {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent-green);
+    font-family: 'Montserrat', monospace;
+}
+
+.signal-progress-bar-premium {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-light);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.signal-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-green) 0%, #34d399 100%);
+    border-radius: 10px;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.signal-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.signal-completed-premium {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(var(--accent-green-rgb), 0.1) 0%, rgba(var(--accent-green-rgb), 0.05) 100%);
+    border-radius: 12px;
+    border: 2px solid var(--accent-green);
+}
+
+.signal-completed-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-green);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.signal-completed-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent-green);
+}
+
+.loadingDots {
+    display: flex;
+    justify-content: center;
+    margin: 12px 0;
+}
+
+.loadingDots span {
+    width: 12px;
+    height: 12px;
+    margin: 0 4px;
+    background-color: var(--accent-green);
+    border-radius: 50%;
+    animation: loadingDots 1.5s infinite ease-in-out;
+}
+
+.loadingDots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loadingDots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes loadingDots {
+    0%, 100% { transform: scale(0.3); opacity: 0.3; }
+    50% { transform: scale(1); opacity: 1; }
+}
+
+/* Улучшенные стили для прогресс-бара */
+#signal-progress-container {
+    padding: 0 24px 16px 24px;
+    margin-top: 16px;
+    width: 100%;
+}
+
+.signal-progress {
+    width: 100%;
+    height: 14px;
+    background-color: var(--bg-light);
+    border-radius: 7px;
+    margin-top: 0;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.signal-progress-bar {
+    height: 100%;
+    background: var(--button-gradient);
+    border-radius: 7px;
+    transition: width 1s linear;
+    box-shadow: 0 1px 3px rgba(var(--accent-green-rgb), 0.3);
+}
+
+.signal-progress-text {
+    font-size: 14px;
+    color: var(--text-primary);
+    opacity: 0.8;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.signal-notification {
+    display: inline-block;
+    background-color: var(--accent-green);
+    color: white;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-top: 12px;
+    animation: fadeIn 0.5s ease, pulse 2s infinite;
+    box-shadow: 0 2px 8px rgba(var(--accent-green-rgb), 0.3);
+    font-weight: 500;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(var(--accent-green-rgb), 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(var(--accent-green-rgb), 0); }
+    100% { box-shadow: 0 0 0 0 rgba(var(--accent-green-rgb), 0); }
+}
+
+/* Обновляем стили для уведомления о невозможности получения сигнала */
+.signal-locked {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bg-white);
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    padding: 28px 24px;
+    z-index: 100;
+    min-width: 320px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.signal-locked-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+    color: var(--accent-red);
+}
+
+.signal-locked-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.signal-locked-text {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.signal-locked-button {
+    padding: 12px 24px;
+    background-color: var(--accent-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(var(--accent-green-rgb), 0.2);
+}
+
+.signal-locked-button:hover {
+    background-color: #059669;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(var(--accent-green-rgb), 0.3);
+}
+
+/* Стили для уведомления о выходных днях */
+.weekend-unavailable .signal-locked-icon {
+    color: #f59e0b;
+}
+
+.weekend-unavailable .signal-locked-title {
+    color: #f59e0b;
+}
+
+/* Стили для затемнения фона при показе уведомления */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease;
+}
+
+/* Футер */
+.footer {
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+    padding: 20px;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Анимация при смене темы */
+.theme-transition {
+    animation: theme-fade 0.3s ease;
+}
+
+@keyframes theme-fade {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* Анимация при смене языка */
+.language-change {
+    animation: language-change 0.5s ease;
+}
+
+@keyframes language-change {
+    0% { opacity: 0.8; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Стили для пульсации селекта при открытии */
+@keyframes pulse-select {
+    0% { transform: scale(0.98); opacity: 0.8; }
+    50% { transform: scale(1.01); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.select-selected.select-changed {
+    animation: select-changed 0.5s ease;
+}
+
+@keyframes select-changed {
+    0% { background-color: rgba(var(--accent-green-rgb), 0.2); }
+    100% { background-color: var(--bg-light); }
+}
+
+/* Темная тема для OTC переключателя */
+[data-theme="dark"] .mode-switcher {
+    background-color: var(--bg-light);
+}
+
+[data-theme="dark"] .mode-btn {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .mode-btn.active {
+    background-color: var(--accent-green);
+    color: white;
+}
+
+/* Крипто тема для OTC переключателя */
+[data-theme="crypto"] .mode-switcher {
+    background-color: var(--bg-light);
+}
+
+[data-theme="crypto"] .mode-btn {
+    color: var(--text-primary);
+}
+
+[data-theme="crypto"] .mode-btn.active {
+    background-color: var(--accent-green);
+    color: #13111c;
+}
+
+/* Адаптивность для планшетов */
+@media screen and (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main";
+    }
+    
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px 24px;
+    }
+    
+    .main-content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .signal-block, .chart-block {
+        width: 100%;
+        margin-right: 0;
+    }
+    
+    .chart-block {
+        height: 400px;
+    }
+}
+
+/* Адаптивность для мобильных */
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        padding: 16px 20px;
+    }
+    
+    .main-content {
+        padding: 16px;
+    }
+    
+    .signal-block, .chart-block {
+        margin-bottom: 16px;
+        border-radius: 12px;
+    }
+    
+    .chart-block {
+        height: 350px; /* Уменьшаем высоту для мобильных */
+        min-height: 300px;
+    }
+    
+    .chart {
+        height: calc(100% - 50px);
+        min-height: 250px;
+    }
+    
+    .chart-otc-message {
+        min-height: 250px;
+        padding: 0;
+    }
+    
+    .otc-message-content {
+        padding: 30px 20px;
+        gap: 16px;
+    }
+    
+    .otc-message-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .otc-message-title {
+        font-size: 20px;
+    }
+    
+    .otc-message-text {
+        font-size: 14px;
+    }
+    
+    .signal-direction {
+        padding: 12px 16px;
+    }
+    
+    .signal-direction .arrow-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .mode-switcher {
+        flex-direction: row;
+        padding: 4px;
+    }
+    
+    .mode-btn {
+        margin-bottom: 0;
+        padding: 10px 8px;
+        font-size: 14px;
+    }
+    
+    .signal-header, .chart-header {
+        padding: 12px 16px;
+    }
+    
+    .signal-block {
+        min-height: auto;
+    }
+    
+    .signal-result {
+        padding: 12px;
+        min-height: auto;
+    }
+    
+    .signal-premium-container {
+        padding: clamp(12px, 4%, 20px);
+        gap: clamp(10px, 4%, 18px);
+    }
+    
+    .signal-premium-header {
+        gap: clamp(8px, 3%, 14px);
+    }
+    
+    .signal-meta-info {
+        gap: clamp(10px, 4%, 16px);
+        padding: clamp(10px, 3.5%, 18px);
+    }
+    
+    .signal-action-premium {
+        padding: clamp(12px, 4%, 20px) clamp(16px, 6%, 28px);
+    }
+    
+    .signal-action-content {
+        gap: clamp(6px, 2.5%, 12px);
+    }
+    
+    .signal-progress-premium {
+        gap: clamp(6px, 2.5%, 12px);
+    }
+    
+    .signal-currency-pair {
+        font-size: 18px;
+        margin: 0;
+        line-height: 1.1;
+    }
+    
+    .signal-meta-info {
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .signal-meta-item {
+        gap: 4px;
+    }
+    
+    .signal-meta-label {
+        font-size: 9px;
+    }
+    
+    .signal-meta-value {
+        font-size: 13px;
+    }
+    
+    .signal-action-premium {
+        padding: 12px 16px;
+    }
+    
+    .signal-action-content {
+        gap: 8px;
+    }
+    
+    .signal-action-text-premium {
+        font-size: 16px;
+    }
+    
+    .signal-action-icon-premium svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .signal-progress-premium {
+        gap: 6px;
+    }
+    
+    .signal-progress-label {
+        font-size: 10px;
+    }
+    
+    .signal-progress-time {
+        font-size: 12px;
+    }
+    
+    .signal-progress-bar-premium {
+        height: 5px;
+    }
+    
+    #signal-progress-container {
+        padding: 0 20px 20px 20px;
+        margin-top: 6px;
+    }
+    
+    .signal-time-info {
+        margin-top: 12px;
+        margin-bottom: 6px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .signal-timeframe, .signal-probability {
+        gap: 2px;
+    }
+    
+    .signal-timeframe .value, .signal-probability .value {
+        font-size: 14px;
+    }
+    
+    .signal-timeframe span, .signal-probability span {
+        font-size: 10px;
+    }
+    
+    .signal-progress {
+        margin-top: 10px;
+        height: 12px;
+    }
+    
+    .signal-progress-text {
+        font-size: 13px;
+        margin-top: 8px;
+    }
+    
+    .chart-info {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .chart-timeframe .value, .chart-accuracy .value {
+        font-size: 14px;
+    }
+    
+    .chart-timeframe span, .chart-accuracy span {
+        font-size: 9px;
+    }
+}
+
+/* Средние мобильные устройства */
+@media screen and (max-width: 640px) and (min-width: 481px) {
+    .signal-time-info {
+        margin: 12px 0 6px 0;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .signal-timeframe .value, .signal-probability .value {
+        font-size: 14px;
+    }
+    
+    .signal-timeframe span, .signal-probability span {
+        font-size: 10px;
+    }
+}
+
+/* Очень маленькие мобильные устройства */
+@media screen and (max-width: 480px) {
+    .chart-block {
+        height: 300px; /* Ещё меньше для маленьких экранов */
+    }
+    
+    .signal-result {
+        padding: 10px;
+        min-height: auto;
+    }
+    
+    .signal-premium-container {
+        padding: clamp(10px, 3.5%, 16px);
+        gap: clamp(8px, 3%, 14px);
+    }
+    
+    .signal-premium-header {
+        gap: clamp(6px, 2.5%, 12px);
+    }
+    
+    .signal-meta-info {
+        gap: clamp(8px, 3%, 12px);
+        padding: clamp(8px, 3%, 14px);
+    }
+    
+    .signal-meta-item {
+        gap: clamp(3px, 1.2%, 6px);
+    }
+    
+    .signal-action-premium {
+        padding: clamp(10px, 3.5%, 16px) clamp(14px, 5%, 24px);
+    }
+    
+    .signal-action-content {
+        gap: clamp(5px, 2%, 10px);
+    }
+    
+    .signal-progress-premium {
+        gap: clamp(5px, 2%, 10px);
+    }
+    
+    .signal-currency-pair {
+        font-size: 16px;
+        margin: 0;
+        line-height: 1.1;
+        letter-spacing: 0.3px;
+    }
+    
+    .signal-meta-info {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .signal-meta-item {
+        gap: 3px;
+    }
+    
+    .signal-meta-label {
+        font-size: 8px;
+    }
+    
+    .signal-meta-divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    }
+    
+    .signal-meta-value {
+        font-size: 12px;
+    }
+    
+    .signal-action-premium {
+        padding: 10px 14px;
+        border-radius: 12px;
+    }
+    
+    .signal-action-content {
+        gap: 6px;
+    }
+    
+    .signal-action-text-premium {
+        font-size: 14px;
+    }
+    
+    .signal-action-icon-premium svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .signal-progress-premium {
+        gap: 5px;
+    }
+    
+    .signal-progress-info {
+        gap: 4px;
+    }
+    
+    .signal-progress-label {
+        font-size: 9px;
+    }
+    
+    .signal-progress-time {
+        font-size: 11px;
+    }
+    
+    .signal-progress-bar-premium {
+        height: 4px;
+    }
+    
+    .signal-completed-premium {
+        padding: 6px 8px;
+        gap: 4px;
+        border-radius: 8px;
+        border-width: 1px;
+    }
+    
+    .signal-completed-icon {
+        width: 14px;
+        height: 14px;
+        font-size: 9px;
+    }
+    
+    .signal-completed-text {
+        font-size: 10px;
+        line-height: 1.2;
+    }
+    
+    .signal-time-info {
+        margin: 10px 0 6px 0;
+        padding: 6px 10px;
+        font-size: 11px;
+        border-radius: 8px;
+    }
+    
+    .signal-timeframe, .signal-probability {
+        gap: 1px;
+    }
+    
+    .signal-timeframe .value, .signal-probability .value {
+        font-size: 13px;
+        font-weight: 600;
+    }
+    
+    .signal-timeframe span, .signal-probability span {
+        font-size: 9px;
+        letter-spacing: 0.3px;
+    }
+    
+    .signal-result {
+        padding: 16px;
+    }
+    
+    .signal-pair {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+    
+    .signal-direction {
+        padding: 10px 14px;
+        margin: 12px 0;
+    }
+    
+    .signal-direction .signal-text {
+        font-size: 18px;
+    }
+    
+    .signal-direction .arrow-icon {
+        width: 32px;
+        height: 32px;
+        margin-left: 12px;
+    }
+    
+    #signal-progress-container {
+        padding: 0 16px 16px 16px;
+        margin-top: 4px;
+    }
+    
+    .signal-progress {
+        margin-top: 8px;
+        height: 10px;
+    }
+    
+    .signal-progress-text {
+        font-size: 12px;
+        margin-top: 6px;
+    }
+    
+    .chart-info {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .chart-timeframe .value, .chart-accuracy .value {
+        font-size: 13px;
+    }
+    
+    .chart-timeframe span, .chart-accuracy span {
+        font-size: 9px;
+    }
+    
+    .chart {
+        height: calc(100% - 45px);
+        min-height: 220px;
+    }
+    
+    .chart-otc-message {
+        min-height: 220px;
+        padding: 0;
+    }
+    
+    .otc-message-content {
+        padding: 24px 16px;
+        gap: 12px;
+        border-radius: 0;
+    }
+    
+    .otc-message-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .otc-message-title {
+        font-size: 18px;
+    }
+    
+    .otc-message-text {
+        font-size: 13px;
+    }
+}
+
+/* Блок информации о графике */
+.chart-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background-color: var(--bg-light);
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 0 0 16px 16px;
+}
+
+.chart-timeframe, .chart-accuracy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.chart-timeframe span, .chart-accuracy span {
+    font-size: 10px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chart-timeframe .value, .chart-accuracy .value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-green);
+}
