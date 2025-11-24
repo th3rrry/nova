@@ -299,6 +299,13 @@
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Отключаем transition при смене темы */
+body.theme-changing *,
+body.theme-changing *::before,
+body.theme-changing *::after {
+    transition: none !important;
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--bg-light);
@@ -498,7 +505,7 @@ body {
 /* Основной контент */
 .main-content {
     grid-area: main;
-    padding: 24px;
+    padding: 24px 24px 0 24px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -534,11 +541,19 @@ body {
 
 .settings-icon {
     color: var(--accent-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
 .settings-header h3 {
     font-size: 20px;
     font-weight: 600;
+    margin: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
 }
 
 /* Группа инпутов */
@@ -854,6 +869,16 @@ body {
 .telegram-icon {
     width: 22px;
     height: 22px;
+    flex-shrink: 0;
+    display: block;
+    overflow: visible;
+}
+
+.telegram-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
 }
 
 /* Блок сигнала */
@@ -879,8 +904,19 @@ body {
     gap: 12px;
 }
 
+.header-content h2 {
+    margin: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
 .signal-icon, .chart-icon {
     color: var(--accent-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
 .time-badge {
@@ -1195,32 +1231,40 @@ body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    justify-content: center;
     gap: 12px;
     padding: 16px;
     background: rgba(0, 0, 0, 0.03);
     border: none;
     border-radius: 12px;
+    text-align: center;
 }
 
 .signal-card-info-icon {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     color: var(--text-primary);
     opacity: 0.6;
     flex-shrink: 0;
-    margin-top: 2px;
+    margin-top: calc((11px * 1.4 - 18px) / 2);
+    height: 18px;
 }
 
 .signal-card-info-icon svg {
     width: 18px;
     height: 18px;
+    display: block;
 }
 
 .signal-card-info-content {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     gap: 6px;
-    flex: 1;
+    width: 100%;
+    text-align: center;
 }
 
 .signal-card-info-label {
@@ -1230,6 +1274,8 @@ body {
     letter-spacing: 0.5px;
     color: var(--text-primary);
     opacity: 0.6;
+    text-align: center;
+    line-height: 1.4;
 }
 
 .signal-card-info-value {
@@ -1237,6 +1283,7 @@ body {
     font-weight: 700;
     color: var(--text-primary);
     font-family: 'Montserrat', sans-serif;
+    text-align: center;
 }
 
 .signal-card-info-value.signal-card-accuracy-value {
@@ -1715,10 +1762,20 @@ body {
 .footer {
     width: 100%;
     text-align: center;
-    margin-top: auto;
-    padding: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 10px 20px 10px 20px;
     font-size: 13px;
     opacity: 0.7;
+}
+
+/* Футер в sidebar на мобильных */
+@media screen and (max-width: 768px) {
+    .sidebar .footer {
+        margin-top: auto;
+        padding: 16px 0 0 0;
+        border-top: 1px solid var(--border-color);
+    }
 }
 
 /* Анимации */
